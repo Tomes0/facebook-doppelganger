@@ -15,16 +15,17 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { UserProfileComponent } from './modules/pages/user-profile/user-profile.component';
 import { HomeModule } from './modules/modules/home.module';
 import { PostService } from './core/services/post.service';
+import { UserProfileModule } from './modules/modules/user-profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    UserProfileComponent,
   ],
   imports: [
     AuthModule,
     HomeModule,
+    UserProfileModule,
     MatDialogModule,
     MatCardModule,
     BrowserModule,

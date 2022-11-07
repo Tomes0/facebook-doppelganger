@@ -4,6 +4,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
 import { AuthComponent } from "../pages/auth/auth.component";
+import { SharedModule } from "./shared.module";
 
 const routes: Routes=[
   { path: '', component: AuthComponent }
@@ -15,7 +16,7 @@ const routes: Routes=[
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
-    CommonModule,
+    SharedModule,
   ],
   exports: [AuthComponent],
   bootstrap: [AppComponent]

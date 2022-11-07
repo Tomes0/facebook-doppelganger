@@ -6,6 +6,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AppComponent } from "src/app/app.component";
 import { HomeComponent } from "../pages/home/home.component";
 import { PostComponent } from "../pages/post/post.component";
+import { SharedModule } from "./shared.module";
 
 
 const routes: Routes=[
@@ -15,11 +16,11 @@ const routes: Routes=[
 @NgModule({
   declarations: [
     HomeComponent,
-    PostComponent],
+    ],
   imports: [
     RouterModule.forChild(routes),
     MatCardModule,
-    CommonModule,
+    SharedModule
   ],
   exports: [HomeComponent],
   bootstrap: [AppComponent]
