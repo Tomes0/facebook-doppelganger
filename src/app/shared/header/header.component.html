@@ -1,34 +1,36 @@
-<header class="p-3 text-bg-dark toolbar navbar-fixed-top">
-  <div class="container">
-    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-        <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-      </a>
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
+  <div class="container-fluid">
 
-      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a style="cursor: pointer;" class="nav-link px-2 text-secondary" routerLink='/home' routerLinkActive="router-link-active" >Home</a></li>
-        <li><a style="cursor: pointer;" class="nav-link px-2 text-white" routerLink='/auth' routerLinkActive="router-link-active">Auth</a></li>
-      </ul>
+    <a class="navbar-brand">
+      <span class="navbar-brand mb-0 h1">Fakebook</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="text-end" *ngIf="true">
-        <button type="button" class="btn btn-outline-light me-2">Login</button>
-        <button type="button" class="btn btn-success">Sign-up</button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link text-light" routerLink='/home' routerLinkActive="router-link-active" >Home</a>
       </div>
+    </div>
 
-      <div class="dropdown" *ngIf="true">
-        <a class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Domestic_cat_cropped.jpg/640px-Domestic_cat_cropped.jpg"
-          alt="mdo" class="rounded-circle" width="32" height="32">
-        </a>
-        <ul class="dropdown-menu text-small">
-          <li><a class="dropdown-item" style="cursor: pointer;">New project...</a></li>
-          <li><a class="dropdown-item" style="cursor: pointer;">Settings</a></li>
-          <li><a class="dropdown-item" style="cursor: pointer;">Profile</a></li>
-          <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" style="cursor: pointer;">Sign out</a></li>
+    <div *ngIf="true">
+      <div class="nav-item dropdown">
+        <button type="button" class="btn btn-danger" style="background: #dc3545 " (click)="onAuth()">Authenticate</button>
+        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" *ngIf="authService.isLoggedIn$ | async" style="background: #b82c3a;" data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="visually-hidden">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item">Action</a></li>
+          <li><a class="dropdown-item">Another action</a></li>
+          <li><a class="dropdown-item">Something else here</a></li>
         </ul>
       </div>
-
     </div>
+
+
+
+
+
   </div>
-</header>
+</nav>

@@ -1,3 +1,56 @@
-<p>auth works!</p>
-asdasasd
+<button class="btn btn-danger pull-right" (click)="close()">X</button>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="authForm">
 
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-floating mb-3">
+            <input type="text" id="floatingInput" class="form-control" formControlName="email" #email>
+            <label for="floatingInput">Email</label>
+
+            <div class="alert alert-danger" role="alert" >
+              Invalid email
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!loginMode">
+        <div class="col-xs-12">
+          <div class="form-floating mb-3">
+            <input type="text" id="floatingInput" class="form-control" formControlName="username">
+            <label for="floatingInput">Username</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!loginMode">
+        <div class="col-xs-12">
+          <div class="form-floating mb-3">
+            <input type="text" id="floatingInput" class="form-control" formControlName="fullName">
+            <label for="floatingInput">Full Name</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-floating mb-3">
+            <input type="password" id="floatingInput" class="form-control" formControlName="password">
+            <label for="floatingInput">Password</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="!authForm.valid">Submit</button>
+
+          <button type="button" class="btn btn-primary" [innerText]=" loginMode? 'Siwtch to registration': 'Switch to login' " (click)="onSwitchMode()"></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

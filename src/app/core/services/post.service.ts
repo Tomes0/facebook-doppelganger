@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, shareReplay, tap } from 'rxjs';
 import { Post } from 'src/app/shared/models/post.model';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +10,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PostService {
-
+  headers = new HttpHeaders({
+    'Access-Control-Allow-Origin': 'http://localhost:4200',
+    'Access-Control-Allow-Methods': '*'
+  })
 
   environment = environment
   public posts$!: Observable<Post[]>;
@@ -18,11 +21,9 @@ export class PostService {
   constructor(private http: HttpClient)  { }
 
   getAllPosts(){
-    const headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': 'http://localhost:4200'
-    })
-    return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all',
-      { headers: headers}
+
+    return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all').pipe(
+      shareReplay()
     )
   }
 
