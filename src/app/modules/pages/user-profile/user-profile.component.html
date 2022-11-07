@@ -1,1 +1,6 @@
-<p>user-profile works!</p>
+<app-user-details [user]="user"></app-user-details>
+
+<div *ngFor="let post of user.postList">
+  <app-post [post]="post"></app-post>
+
+</div>

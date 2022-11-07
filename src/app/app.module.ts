@@ -16,6 +16,7 @@ import { UserProfileComponent } from './modules/pages/user-profile/user-profile.
 import { HomeModule } from './modules/modules/home.module';
 import { PostService } from './core/services/post.service';
 import { UserProfileModule } from './modules/modules/user-profile.module';
+import { UserDetailsComponent } from './modules/pages/user-profile/user-details/user-details.component';
 
 @NgModule({
   declarations: [
