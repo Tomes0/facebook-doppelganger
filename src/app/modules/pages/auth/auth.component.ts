@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service'
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit, AfterContentInit {
+export class AuthComponent implements OnInit {
   authForm: FormGroup;
   loginMode:boolean;
 
@@ -25,12 +25,8 @@ export class AuthComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterContentInit(){
     this.loginMode=true;
     this.changeLoadedForm();
-
   }
 
   private changeLoadedForm(){
@@ -56,12 +52,11 @@ export class AuthComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit(){
-    console.log(this.authForm);
     if(this.loginMode){
-      this.authService.login(this.authForm.value['email'], this.authForm.value['password']);
+      this.authService.login(this.authForm.value['email'], this.authForm.value['password']).subscribe();
       this.dialogRef.close();
     }else{
-      this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['username']);
+      this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['username']).subscribe();
 
     }
 

@@ -16,14 +16,14 @@
 
     <div *ngIf="true">
       <div class="nav-item dropdown">
-        <button type="button" class="btn btn-danger" style="background: #dc3545 " (click)="onAuth()">Authenticate</button>
+        <button type="button" class="btn btn-danger" style="background: #dc3545" (click)="onAuth()">Authenticate</button>
         <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" *ngIf="authService.isLoggedIn$ | async" style="background: #b82c3a;" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="visually-hidden">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item">Action</a></li>
-          <li><a class="dropdown-item">Another action</a></li>
-          <li><a class="dropdown-item">Something else here</a></li>
+          <li><a style="cursor: pointer;" class="dropdown-item" routerLink='/myprofile'>My profile</a></li>
+          <li><a style="cursor: pointer;" class="dropdown-item">Create post</a></li>
+          <li><a style="cursor: pointer;" class="dropdown-item" (onclick)="logout()">Log out</a></li>
         </ul>
       </div>
     </div>

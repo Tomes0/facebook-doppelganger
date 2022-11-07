@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthComponent } from 'src/app/modules/pages/auth/auth.component';
 
@@ -10,10 +11,10 @@ import { AuthComponent } from 'src/app/modules/pages/auth/auth.component';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private dialog: MatDialog,
-    public authService: AuthService) { }
-
-
+  constructor(
+    private dialog: MatDialog,
+    public authService: AuthService,
+    private router: Router) { }
 
   onAuth(){
 
@@ -25,10 +26,13 @@ export class HeaderComponent implements OnInit {
 
     const dialogRef = this.dialog.open(AuthComponent, dialogConfig);
 
-    dialogRef.afterClosed().pipe( ).subscribe();
-
   }
 
+  logout(){
+    this.authService.logout();
+    let currentUrl:string = this.router.url;
+    this.router.navigate([currentUrl]);
+  }
 
   ngOnInit(): void {
   }
