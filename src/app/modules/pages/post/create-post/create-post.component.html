@@ -1,0 +1,28 @@
+<div class="container">
+  <form [formGroup]="form">
+    <h2>Create a post</h2>
+
+    <div class="input-group mb-3 form-floating">
+      <input type="text" class="form-control" id="floatingInput" formControlName="title" aria-label="title" aria-describedby="basic-addon1">
+      <label for="floatingInput">Title</label>
+    </div>
+    <div class="input-group form-floating">
+      <textarea class="form-control" id="floatingInput" aria-label="content" formControlName="content" style="height: 100px;"></textarea>
+      <label for="floatingInput">Content</label>
+    </div>
+    <br>
+    <div class="mb-3">
+      <label >Picture upload</label>
+      <br>
+      <input type="file" class="form-control" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+    </div>
+    <br>
+    <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid">Post!</button>
+          <button type="submit" class="btn btn-danger"  (click)="onCancel()">Cancel</button>
+    </div>
+
+
+
+  </form>
+</div>

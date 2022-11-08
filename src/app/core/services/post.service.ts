@@ -10,10 +10,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PostService {
-  headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:4200',
-    'Access-Control-Allow-Methods': '*'
-  })
 
   environment = environment
   public posts$!: Observable<Post[]>;
@@ -23,8 +19,21 @@ export class PostService {
   getAllPosts(){
 
     return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all').pipe(
-      shareReplay()
+      shareReplay(),
+      map(result => {
+        return result.sort((a,b) => {
+          return a.creationDate > b.creationDate ? -1 : 1;
+          })
+      })
     )
+  }
+
+  createPost(title: string, content: string, userId: number){
+    return this.http.post(this.environment.backendUrl + '/api/post/save/' + userId,
+    {
+      title:title,
+      content:content,
+    })
   }
 
 

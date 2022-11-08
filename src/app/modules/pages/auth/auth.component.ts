@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service'
@@ -48,7 +48,6 @@ export class AuthComponent implements OnInit {
   onSwitchMode(){
     this.loginMode = !this.loginMode;
     this.changeLoadedForm();
-    console.log(this.authForm);
   }
 
   onSubmit(){
@@ -62,7 +61,6 @@ export class AuthComponent implements OnInit {
 
     this.authForm.reset();
   }
-
 
   close() {
     this.dialogRef.close();

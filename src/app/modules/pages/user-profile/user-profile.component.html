@@ -1,6 +1,5 @@
-<app-user-details [user]="user"></app-user-details>
+<app-user-details [user]="user$ | async"></app-user-details>
 
-<div *ngFor="let post of user.postList">
+<div *ngFor="let post of (user$ | async).postList ">
   <app-post [post]="post"></app-post>
-
 </div>

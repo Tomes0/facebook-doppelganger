@@ -5,6 +5,7 @@ import { PostComponent } from '../pages/post/post.component';
 import { SharedModule } from './shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { UserDetailsComponent } from '../pages/user-profile/user-details/user-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes=[
   { path: '', component: UserProfileComponent }
@@ -13,7 +14,7 @@ const routes: Routes=[
 @NgModule({
   declarations: [
     UserProfileComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

@@ -6,22 +6,23 @@ import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/modules/auth.module';
-import { HomeComponent } from './modules/pages/home/home.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PostComponent } from './modules/pages/post/post.component';
 import { AuthInterceptorService } from './core/services/coor-header-interceptor.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { UserProfileComponent } from './modules/pages/user-profile/user-profile.component';
 import { HomeModule } from './modules/modules/home.module';
 import { PostService } from './core/services/post.service';
 import { UserProfileModule } from './modules/modules/user-profile.module';
-import { UserDetailsComponent } from './modules/pages/user-profile/user-details/user-details.component';
+import { CreatePostComponent } from './modules/pages/post/create-post/create-post.component';
+import { SharedModule } from './modules/modules/shared.module';
+import { CreatePostModule } from './modules/modules/create-post.module';
+import { RoundButtonDirective } from './shared/directives/round-button.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    RoundButtonDirective,
   ],
   imports: [
     AuthModule,
@@ -33,6 +34,8 @@ import { UserDetailsComponent } from './modules/pages/user-profile/user-details/
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
+    CreatePostModule
 
   ],
   providers: [

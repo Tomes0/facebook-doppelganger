@@ -1,11 +1,11 @@
 export class Post{
   constructor(
-    public postId: Number,
+    public postId: number,
     public content: string,
-    public creationDate: string,
+    public creationDate: Date,
     public title: string,
-    public lastModificationDate: string,
-    public ownerId: Number,
-    public ownerUser: String
+    public lastModificationDate: Date,
+    public ownerId: number,
+    public ownerUser: string
     ){}
 }
