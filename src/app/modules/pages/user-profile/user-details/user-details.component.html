@@ -1,5 +1,19 @@
-{{user.userName}}
-<img [src]='path'>
-<img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
-    9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+<br>
+<div class="row">
+  <div class="col-2">
+    <img [src]='profilePicture' class="rounded-circle rounded float-start" style="width: 144px;">
+  </div>
+
+  <div class="col-9">
+    <h1>{{user.userName}}</h1>
+    <p>{{user.fullName}}</p>
+    <p>{{user.email}}</p>
+    <p>{{user.creationDate}}</p>
+
+  </div>
+</div>
+<br>
+
+
+
+

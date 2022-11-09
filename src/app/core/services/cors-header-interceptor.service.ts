@@ -6,15 +6,12 @@ import { AuthService } from "./auth.service";
 
 
 @Injectable()
-export class AuthInterceptorService implements HttpInterceptor{
+export class CorsInterceptor implements HttpInterceptor{
 
-  headers = new HttpHeaders({
-    'Access-Control-Allow-Origin': 'http://localhost:4200'
-  })
+
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const modifiedReq = req.clone({headers: this.headers});
-    return next.handle(modifiedReq);
+    return next.handle(req);
   }
   constructor(private authService: AuthService){}
 }

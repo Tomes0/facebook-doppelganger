@@ -1,3 +1,6 @@
+import { Picture } from "./picture.model";
+import { User } from "./user.model";
+
 export class Post{
   constructor(
     public postId: number,
@@ -6,6 +9,6 @@ export class Post{
     public title: string,
     public lastModificationDate: Date,
     public ownerId: number,
-    public ownerUser: string
+    public ownerObject?: User,
     ){}
 }

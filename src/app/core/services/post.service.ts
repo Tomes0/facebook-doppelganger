@@ -17,7 +17,6 @@ export class PostService {
   constructor(private http: HttpClient)  { }
 
   getAllPosts(){
-
     return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all').pipe(
       shareReplay(),
       map(result => {
@@ -28,13 +27,15 @@ export class PostService {
     )
   }
 
-  createPost(title: string, content: string, userId: number){
+  createPost(title: string, content: string, userId: number, picture?: File){
     return this.http.post(this.environment.backendUrl + '/api/post/save/' + userId,
-    {
-      title:title,
-      content:content,
-    })
+      {
+        title:title,
+        content:content,
+      })
   }
+
+
 
 
 
