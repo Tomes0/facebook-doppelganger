@@ -8,23 +8,23 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.css']
 })
-export class UserDetailsComponent implements AfterContentInit {
+export class UserDetailsComponent implements OnInit {
 
   profilePicture: string;
 
-  @Input() user: User;
-  picture: Picture;
+  @Input() user: User
+  picture: Picture = null;
   path:string;
 
   constructor() { }
 
-
-  ngAfterContentInit(): void {
-    if(!this.user.pictureList[0]){
-      this.picture = this.user.pictureList[0];
-      this.profilePicture = 'data:image/' + this.picture.extension + ';base64, ' + this.picture.bytea;
+  ngOnInit(): void {
+    if(!!this.user.pictureList[0]){
+      this.profilePicture =  this.user.pictureList[0].bytea;
     }else {
       this.profilePicture = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png';
     }
+
   }
+
 }

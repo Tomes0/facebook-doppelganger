@@ -2,8 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { catchError, map, tap } from 'rxjs/operators'
+import { catchError, map, take, tap } from 'rxjs/operators'
 import { User } from 'src/app/shared/models/user.model';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ import { User } from 'src/app/shared/models/user.model';
 export class AuthService {
   environment = environment
 
+  loggedInUser$ = new BehaviorSubject<User>(null);
   isLoggedIn$ = new BehaviorSubject<boolean>(false);
-  user$ = new BehaviorSubject<User>(null);
 
   login(email: string, password: string){
     return this.http.post<User>(this.environment.backendUrl + '/api/auth/login',
@@ -23,34 +24,37 @@ export class AuthService {
       map(resData => {
         if(resData != null){
           this.isLoggedIn$.next(true);
-          this.user$.next(resData);
-        }
-          else {
-            this.isLoggedIn$.next(false);
-            this.user$.next(null);
+          this.loggedInUser$.next(resData);
+        }else {
+          this.isLoggedIn$.next(false);
+          this.loggedInUser$.next(null);
+          alert('Incorrect email/password!')
           }
-
-
-      })
-    );
+      }),
+      take(1)
+    ).subscribe();
   }
 
-  register(email: string, password: string, fullName: string, username: string){
+  register(email: string, password: string, fullName: string, userName: string){
     return this.http.post(this.environment.backendUrl + '/api/auth/register',
     {
       email:email,
       password:password,
       fullName:fullName,
-      username:username
-    }
-    );
+      userName:userName
+    }).pipe(
+      take(1)
+    ).subscribe();
   }
 
   logout(){
     this.isLoggedIn$.next(false);
-    this.user$.next(null);
+    this.loggedInUser$.next(null);
   }
 
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+    ) { }
 }

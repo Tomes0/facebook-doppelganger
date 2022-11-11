@@ -1,18 +1,18 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PictureService } from 'src/app/core/services/picture.service';
 import { PostService } from 'src/app/core/services/post.service';
-import { Observable } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
+import { CreatePostComponent } from '../../post/create-post/create-post.component';
 
 @Component({
-  selector: 'app-create-post',
-  templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.css']
+  selector: 'app-picture-upload',
+  templateUrl: './picture-upload.component.html',
+  styleUrls: ['./picture-upload.component.css']
 })
-export class CreatePostComponent implements OnInit {
+export class PictureUploadComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<CreatePostComponent>,
@@ -25,11 +25,7 @@ export class CreatePostComponent implements OnInit {
   @ViewChild('fileUpload') file: ElementRef;
 
   form: FormGroup;
-
-  title = '';
-  content = '';
   picture: File = null;
-
 
   ngOnInit(): void {
     this.initForm();
@@ -37,9 +33,7 @@ export class CreatePostComponent implements OnInit {
 
   private initForm(){
     this.form = new FormGroup({
-      'title': new FormControl(this.title, Validators.required),
-      'content': new FormControl(this.content, Validators.required),
-      'picture': new FormControl(this.picture),
+      'picture': new FormControl(this.picture, Validators.required),
     })
   }
   onCancel(){
@@ -47,12 +41,10 @@ export class CreatePostComponent implements OnInit {
   }
 
   onSubmit(){
-    this.postService.createPost(this.form.value['title'], this.form.value['content'], this.authService.loggedInUser$.getValue().userId).subscribe();
     if(this.form.value['picture']){
       this.pictureService.savePicture(this.file.nativeElement.files[0],
         this.authService.loggedInUser$.getValue().userId);
     }
-
     this.dialogRef.close()
   }
 

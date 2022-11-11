@@ -13,16 +13,16 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HomeModule } from './modules/modules/home.module';
 import { PostService } from './core/services/post.service';
 import { UserProfileModule } from './modules/modules/user-profile.module';
-import { CreatePostComponent } from './modules/pages/post/create-post/create-post.component';
 import { SharedModule } from './modules/modules/shared.module';
 import { CreatePostModule } from './modules/modules/create-post.module';
-import { RoundButtonDirective } from './shared/directives/round-button.directive';
+import { PictureUploadComponent } from './modules/pages/picture/picture-upload/picture-upload.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RoundButtonDirective,
+    PictureUploadComponent,
   ],
   imports: [
     AuthModule,

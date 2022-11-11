@@ -35,6 +35,10 @@ export class PostService {
       })
   }
 
+  deletePost(postId: number){
+    return this.http.delete(this.environment.backendUrl + '/api/post/delete/' + postId)
+  }
+
 
 
 

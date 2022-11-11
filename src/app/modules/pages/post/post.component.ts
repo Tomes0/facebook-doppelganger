@@ -7,15 +7,10 @@ import { Post } from 'src/app/shared/models/post.model';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css']
 })
-export class PostComponent implements OnInit {
+export class PostComponent {
   @Input() post: Post;
-  id: number;
 
   constructor(
     private router: Router
   ) { }
-
-  ngOnInit(): void {
-    this.id = this.post.ownerId;
-  }
 }

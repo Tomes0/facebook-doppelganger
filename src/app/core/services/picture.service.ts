@@ -18,17 +18,25 @@ export class PictureService {
   constructor(private http: HttpClient)  { }
 
   savePicture(picture: File, id: number){
-
-    console.log(picture)
     let reader = new FileReader();
     reader.readAsDataURL(picture);
 
-    return this.http.post(this.environment.backendUrl + '/api/picture/save/' + id,
+    let there=this;
+
+    reader.onload = function() {
+      there.http.post(there.environment.backendUrl + '/api/picture/save/' + id,
     {
       extension: picture.type,
-      picture: reader.result
-    })
+      bytea: reader.result
+    }).subscribe();
+
+    }
+
+
+
 
   }
+
+
 
 }

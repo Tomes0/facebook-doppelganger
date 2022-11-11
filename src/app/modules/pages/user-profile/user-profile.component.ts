@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { Post } from 'src/app/shared/models/post.model';
@@ -12,21 +13,21 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  user$: Observable<User>;
+  user: User;
+  data: any;
   id: number;
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.data = this.route.snapshot.data;
+    this.user = this.data['user'];
 
-    this.route.params.subscribe( (param: Params) =>{
-      this.id = +param['id'];
-      this.user$ = this.userService.getUser(this.id);
-    });
-
-
+    console.log(this.user)
   }
 }

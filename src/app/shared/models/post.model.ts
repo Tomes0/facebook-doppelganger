@@ -9,6 +9,6 @@ export class Post{
     public title: string,
     public lastModificationDate: Date,
     public ownerId: number,
-    public ownerObject?: User,
+    public ownerObject: User,
     ){}
 }

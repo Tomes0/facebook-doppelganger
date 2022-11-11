@@ -1,20 +1,31 @@
-
-<mat-card class="posts">
-  <div class="row">
-    <h2><p>{{ post.title }}</p></h2>
-
-    <nav class="navbar bg-light">
-      <div class="container-fluid">
-        <a [routerLink]="['/profile', post.ownerId]" class="navbar-brand">
-          <h3>{{ post.ownerObject.userName }}</h3>
-        </a>
+<ng-container *ngIf="post.ownerObject">
+  <mat-card class="posts">
+    <div class="d-flex flex-column bd-highlight mb-3">
+      <div class="bd-highlight">
+        <h2><p>{{ post.title }}</p></h2>
       </div>
-    </nav>
+      <div class="bd-highlight">
 
-  </div>
-  <mat-card-content>
-    <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <div>{{ post.content }}</div>
+        <div class="d-flex flex-row bd-highlight mb-3">
+          <div class="bd-highlight">
+            <img class="rounded-circle rounded float-start " style="width: 20px;"
+              [src]="post.ownerObject.pictureList[0]? post.ownerObject.pictureList[0].bytea:
+              'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'" >
+          </div>
+          <div class="bd-highlight">
+            <a [routerLink]="['/profile', post.ownerId]" class="nav-link">
+              <h4>{{ post.ownerObject.userName }}</h4>
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </mat-card-content>
-</mat-card>
+    <br>
+    <mat-card-content>
+        <div>{{ post.content }}</div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>
+
+

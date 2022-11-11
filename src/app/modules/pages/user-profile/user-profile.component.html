@@ -1,5 +1,22 @@
-<app-user-details [user]="user$ | async"></app-user-details>
 
-<div *ngFor="let post of (user$ | async).postList ">
-  <app-post [post]="post"></app-post>
-</div>
+<ng-container *ngIf="!!user">
+  <app-user-details [user]="user"></app-user-details>
+  <mat-tab-group>
+
+    <mat-tab label="Posts">
+      <app-user-posts [user]="user"></app-user-posts>
+    </mat-tab>
+
+    <mat-tab label="Pictures">
+      <app-user-pictures [user]="user"></app-user-pictures>
+    </mat-tab>
+
+  </mat-tab-group>
+</ng-container>
+
+
+
+
+
+
+

@@ -13,7 +13,7 @@ export class AuthComponent implements OnInit {
   loginMode:boolean;
 
   email = '';
-  username = '';
+  userName = '';
   password = '';
   fullName = '';
 
@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
       this.authForm = new FormGroup({
         'email': new FormControl(this.email, [Validators.required, Validators.email]),
         'password': new FormControl(this.password, Validators.required),
-        'username': new FormControl(this.username, Validators.required),
+        'userName': new FormControl(this.userName, Validators.required),
         'fullName': new FormControl(this.fullName, Validators.required)
       })
     }
@@ -52,14 +52,12 @@ export class AuthComponent implements OnInit {
 
   onSubmit(){
     if(this.loginMode){
-      this.authService.login(this.authForm.value['email'], this.authForm.value['password']).subscribe();
+      this.authService.login(this.authForm.value['email'], this.authForm.value['password']);
       this.dialogRef.close();
     }else{
-      this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['username']).subscribe();
-
+      this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['userName']);
+      this.onSwitchMode();
     }
-
-    this.authForm.reset();
   }
 
   close() {

@@ -2,7 +2,9 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { UserService } from 'src/app/core/services/user.service';
 import { AuthComponent } from 'src/app/modules/pages/auth/auth.component';
+import { PictureUploadComponent } from 'src/app/modules/pages/picture/picture-upload/picture-upload.component';
 import { CreatePostComponent } from 'src/app/modules/pages/post/create-post/create-post.component';
 import { User } from '../models/user.model';
 
@@ -13,12 +15,13 @@ import { User } from '../models/user.model';
 })
 export class HeaderComponent{
 
-  user$ = this.authService.user$;
+  user$ = this.authService.loggedInUser$;
   id: number;
 
   constructor(
     private dialog: MatDialog,
-    public authService: AuthService,
+    private authService: AuthService,
+    private userService: UserService,
     private router: Router) { }
 
   onAuth(){
@@ -39,6 +42,15 @@ export class HeaderComponent{
     dialogConfig.width = "800px";
 
     const dialogRef = this.dialog.open(CreatePostComponent, dialogConfig);
+  }
+  onUploadPicture(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "800px";
+
+    const dialogRef = this.dialog.open(PictureUploadComponent, dialogConfig);
   }
 
   logout(){

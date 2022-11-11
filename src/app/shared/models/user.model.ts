@@ -8,7 +8,7 @@ export class User{
     public email: string,
     public fullName: string,
     public creationDate: Date,
-    public postList?: Post[],
-    public pictureList?: Picture[]
+    public postList: Post[],
+    public pictureList: Picture[]
     ){}
 }

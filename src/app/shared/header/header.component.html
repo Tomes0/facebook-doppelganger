@@ -10,7 +10,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link text-light" routerLink='/home' routerLinkActive="router-link-active" >Home</a>
+        <a class="nav-link text-light" routerLink='/home' routerLinkActive="router-link-active">Home</a>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
       <div class="nav-item dropdown">
         <div class="btn-group" role="group">
           <button type="button" *ngIf="! (user$ | async)" class="btn btn-danger btn-outline-dark" style="background: #dc3545" (click)="onAuth()">Authenticate</button>
-          <button type="button" *ngIf="!!(user$ | async)" class="btn btn-danger btn-outline-dark" style="background: #dc3545">{{user$.getValue().userName}}</button>
+          <button type="button" *ngIf="!!(user$ | async)" class="btn btn-danger btn-outline-dark" style="background: #dc3545">{{ user$.getValue().userName }}</button>
 
           <div *ngIf="!!((user$ | async))">
             <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split btn-outline-dark"  style="border-radius: 0px  0.375rem 0.375rem 0px;" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,6 +28,8 @@
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
               <li><a style="cursor: pointer;" class="dropdown-item" [routerLink]="['/profile', user$.getValue().userId]">My profile</a></li>
               <li><a style="cursor: pointer;" class="dropdown-item" (click)="onCreatePost()">Create post</a></li>
+              <li><a style="cursor: pointer;" class="dropdown-item" (click)="onUploadPicture()">Upload picture</a></li>
+              <hr>
               <li><a style="cursor: pointer;" class="dropdown-item" (click)="logout()">Log out</a></li>
             </ul>
 
