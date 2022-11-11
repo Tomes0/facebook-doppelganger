@@ -28,6 +28,5 @@ export class UserProfileComponent implements OnInit {
     this.data = this.route.snapshot.data;
     this.user = this.data['user'];
 
-    console.log(this.user)
   }
 }

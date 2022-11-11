@@ -6,7 +6,6 @@ import { UserDetailsComponent } from '../pages/user-profile/user-details/user-de
 import { MatTabsModule } from '@angular/material/tabs';
 import { UserPicturesComponent } from '../pages/user-profile/user-pictures/user-pictures.component';
 import { UserPostsComponent } from '../pages/user-profile/user-posts/user-posts.component';
-import { LightboxModule } from 'ngx-lightbox';
 import { UserResolver } from 'src/app/core/resolver/user.resolver';
 
 
@@ -25,7 +24,6 @@ const routes: Routes=[
     RouterModule.forChild(routes),
     SharedModule,
     MatTabsModule,
-    LightboxModule
   ],
 })
 export class UserProfileModule { }

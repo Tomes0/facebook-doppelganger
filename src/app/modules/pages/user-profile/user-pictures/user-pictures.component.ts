@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Lightbox } from 'ngx-lightbox';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { PictureService } from 'src/app/core/services/picture.service';
+import { PostService } from 'src/app/core/services/post.service';
+
 import { Picture } from 'src/app/shared/models/picture.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -9,13 +12,15 @@ import { User } from 'src/app/shared/models/user.model';
   styleUrls: ['./user-pictures.component.css']
 })
 export class UserPicturesComponent implements OnInit {
-
   @Input() user: User;
   src: Picture[];
 
   _albums: any = [];
 
-  constructor(private _lightbox: Lightbox) {}
+  constructor(
+    private pictureService: PictureService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.src = this.user.pictureList;
@@ -24,4 +29,7 @@ export class UserPicturesComponent implements OnInit {
     })
   }
 
+  onClick(image: Picture){
+
+  }
 }

@@ -11,8 +11,8 @@
     </mat-card-content>
 
     <div class="btn-group" role="group" *ngIf="post.ownerId == authService.loggedInUser$.getValue().userId">
-        <button type="button" class="btn btn-danger" (click)="onDelete(post.postId)">Delete</button>
-        <button type="button" class="btn btn-primary" (click)="onEdit(post.postId)">Edit</button>
+        <button type="button" class="btn btn-danger" (click)="onDelete(post)">Delete</button>
+        <button type="button" class="btn btn-primary" (click)="onEdit(post)">Edit</button>
     </div>
 
   </mat-card>
