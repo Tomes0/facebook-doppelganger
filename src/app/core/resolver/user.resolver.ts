@@ -9,8 +9,10 @@ import { UserService } from "../services/user.service";
 @Injectable({providedIn: 'root'})
 export class UserResolver implements Resolve<User>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): User | Observable<User> | Promise<User> {
-    const id = route.paramMap.get('id');
-    return this.userService.get(+id)
+    const id = +route.paramMap.get('id');
+
+    this.userService.get(id)
+    return this.userService.resolverGet(id);
 
   }
 

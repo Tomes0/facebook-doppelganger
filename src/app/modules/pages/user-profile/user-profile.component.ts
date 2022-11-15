@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -12,15 +12,20 @@ import { User } from 'src/app/shared/models/user.model';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   user: User;
-
+  userSub: Subscription
 
   constructor(
     private route: ActivatedRoute,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.user = this.route.snapshot.data['user'];
+    this.userSub = this.userService.user$.subscribe(res => this.user = res)
+  }
+
+  ngOnDestroy(): void {
+    this.userSub.unsubscribe()
   }
 }

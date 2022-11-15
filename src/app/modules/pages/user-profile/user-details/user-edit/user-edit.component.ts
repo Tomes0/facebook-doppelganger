@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/shared/models/user.model';
@@ -23,6 +24,7 @@ export class UserEditComponent implements OnInit {
   constructor(
     private userService: UserService,
     private authService: AuthService,
+    private router: Router,
     private dialogRef: MatDialogRef<AuthComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
       if(data){

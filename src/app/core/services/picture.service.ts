@@ -13,8 +13,6 @@ import { environment } from 'src/environments/environment';
 export class PictureService {
 
   environment = environment
-  public pictures$!: Observable<Picture[]>;
-
   constructor(private http: HttpClient)  { }
 
   save(picture: File, id: number){

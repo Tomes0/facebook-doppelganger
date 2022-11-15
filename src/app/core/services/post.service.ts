@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class PostService {
 
   environment = environment
-  postsChanged$ = new BehaviorSubject<Post[]>(null)
+  posts$ = new BehaviorSubject<Post[]>(null)
 
   constructor(private http: HttpClient)  { }
 
@@ -25,7 +25,9 @@ export class PostService {
         })
         return sorted
       }),
-      take(1)).subscribe(res => this.postsChanged$.next(res))
+      take(1)).subscribe(
+        res => this.posts$.next(res)
+      )
 
   }
 
@@ -34,11 +36,21 @@ export class PostService {
       {
         title:title,
         content:content,
-      }).pipe(take(1));
+      }).pipe(
+        take(1),
+        tap(
+          this.getAllPosts()
+        )
+        );
   }
 
   deletePost(postId: number){
-    return this.http.delete(this.environment.backendUrl + '/api/post/delete/' + postId).pipe(take(1));
+    return this.http.delete(this.environment.backendUrl + '/api/post/delete/' + postId).pipe(
+      take(1),
+      tap(
+        this.getAllPosts()
+      )
+      );
   }
 
   updatePost(postId: number, content: string, title: string){
@@ -46,7 +58,12 @@ export class PostService {
     {
       title:title,
       content:content,
-    }).pipe(take(1));
+    }).pipe(
+      take(1),
+      tap(
+        this.getAllPosts()
+      )
+      );
   }
 
 

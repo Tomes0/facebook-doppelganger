@@ -18,7 +18,7 @@ export class CreatePostComponent implements OnInit {
     private dialogRef: MatDialogRef<CreatePostComponent>,
     private postService: PostService,
     private authService: AuthService,
-    private pictureService: PictureService,
+    private userService: UserService,
     @Inject(MAT_DIALOG_DATA) data
   ) {
     if(data){
@@ -69,7 +69,8 @@ export class CreatePostComponent implements OnInit {
         x => this.postService.getAllPosts()
       );
     }
+
+    this.userService.get(this.authService.loggedInUser$.getValue().userId);
     this.dialogRef.close()
   }
-
 }
