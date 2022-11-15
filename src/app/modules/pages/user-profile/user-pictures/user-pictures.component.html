@@ -1,6 +1,14 @@
-<div class="imgcontainer">
-	<div class="gallery" *ngFor="let image of _albums; let i=index">
-	  <img [src]="image" (click)="onClick(image)"/>
-	</div>
-</div>
-
+<mat-grid-list cols="5" >
+  <mat-grid-tile *ngFor="let image of _albums; let i=index">
+    <div class="container">
+      <div class="row">
+        <img [src]="image" style="width: 100%;">
+      </div>
+      <div class="row">
+        <div class="btn-group">
+          <button *ngIf="isOwner" (click)="onDelete(user.pictureList[i].pictureId)" class="btn btn-danger btn-sm squareBorder">Delete</button>
+        </div>
+      </div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

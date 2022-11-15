@@ -16,6 +16,8 @@ import { UserProfileModule } from './modules/modules/user-profile.module';
 import { SharedModule } from './modules/modules/shared.module';
 import { CreatePostModule } from './modules/modules/create-post.module';
 import { PictureUploadComponent } from './modules/pages/picture/picture-upload/picture-upload.component';
+import { UserEditComponent } from './modules/pages/user-profile/user-details/user-edit/user-edit.component';
+import { UserSettingsComponent } from './modules/pages/user-profile/user-settings/user-settings.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { PictureUploadComponent } from './modules/pages/picture/picture-upload/p
     AppComponent,
     HeaderComponent,
     PictureUploadComponent,
+    UserEditComponent,
+    UserSettingsComponent,
   ],
   imports: [
     AuthModule,

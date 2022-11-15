@@ -42,7 +42,7 @@ export class PictureUploadComponent implements OnInit {
 
   onSubmit(){
     if(this.form.value['picture']){
-      this.pictureService.savePicture(this.file.nativeElement.files[0],
+      this.pictureService.save(this.file.nativeElement.files[0],
         this.authService.loggedInUser$.getValue().userId);
     }
     this.dialogRef.close()

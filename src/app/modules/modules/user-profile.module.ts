@@ -7,7 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { UserPicturesComponent } from '../pages/user-profile/user-pictures/user-pictures.component';
 import { UserPostsComponent } from '../pages/user-profile/user-posts/user-posts.component';
 import { UserResolver } from 'src/app/core/resolver/user.resolver';
-
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const routes: Routes=[
   { path: '', component: UserProfileComponent, resolve: {user: UserResolver}}
@@ -24,6 +24,7 @@ const routes: Routes=[
     RouterModule.forChild(routes),
     SharedModule,
     MatTabsModule,
+    MatGridListModule,
   ],
 })
 export class UserProfileModule { }

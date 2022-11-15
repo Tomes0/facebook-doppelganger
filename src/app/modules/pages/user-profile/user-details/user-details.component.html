@@ -9,8 +9,16 @@
     <p>{{user.fullName}}</p>
     <p>{{user.email}}</p>
     <p>{{user.creationDate}}</p>
-
   </div>
+
+  <ng-container *ngIf="!!authService.loggedInUser$.getValue() && user.userId === authService.loggedInUser$.getValue().userId">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <div class="btn-group">
+        <button class="btn btn-success me-md-2" type="button" (click)="onEdit(user)">Edit details</button>
+      </div>
+    </div>
+  </ng-container>
+
 </div>
 <br>
 

@@ -1,5 +1,6 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
@@ -17,17 +18,21 @@ import { CreatePostComponent } from '../../post/create-post/create-post.componen
 export class UserPostsComponent implements OnInit {
   @Input() user: User;
   posts: Post[]
-
-
+  localFormat = formatDate;
 
   constructor(
     private postService: PostService,
     public authService: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(LOCALE_ID) public locale: string
+
   ) { }
 
   ngOnInit(): void {
-    this.posts = this.user.postList;
+    const sorted = this.user.postList.sort((a,b) =>{
+      return a.creationDate.valueOf() < b.creationDate.valueOf()? 1 : -1
+    })
+    this.posts = sorted;
   }
 
   onEdit(post: Post){

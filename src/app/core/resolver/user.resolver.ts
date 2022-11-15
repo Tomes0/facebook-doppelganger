@@ -10,7 +10,7 @@ import { UserService } from "../services/user.service";
 export class UserResolver implements Resolve<User>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): User | Observable<User> | Promise<User> {
     const id = route.paramMap.get('id');
-    return this.userService.getUser(+id)
+    return this.userService.get(+id)
 
   }
 

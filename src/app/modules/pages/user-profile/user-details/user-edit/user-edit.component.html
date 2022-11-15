@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="!loginMode">
+      <div class="row">
         <div class="col-xs-12">
           <div class="form-floating mb-3">
             <input type="text" id="floatingInput" class="form-control" formControlName="userName">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="!loginMode">
+      <div class="row">
         <div class="col-xs-12">
           <div class="form-floating mb-3">
             <input type="text" id="floatingInput" class="form-control" formControlName="fullName">
@@ -37,21 +37,11 @@
       </div>
 
       <div class="row">
-        <div class="col-xs-12">
-          <div class="form-floating mb-3">
-            <input [type]="!showPassword? 'password' : 'text'" id="floatingInput" class="form-control" formControlName="password" #passwordField>
-            <label for="floatingInput">Password</label>
-            <button class="btn btn-secondary btn-sm" (click)="onTogglePassword()">Show password</button>
-          </div>
+        <div class="col-xs-12 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="!authForm.valid">Update</button>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12 d-flex justify-content-between">
-          <button type="submit" class="btn btn-success" (click)="onSubmit()" [disabled]="!authForm.valid">Submit</button>
-          <button type="button" class="btn btn-primary" [innerText]=" loginMode? 'Siwtch to registration': 'Switch to login' " (click)="onSwitchMode()"></button>
-        </div>
-      </div>
     </form>
   </div>
 </div>

@@ -4,15 +4,16 @@
     <div class="row">
       <h2><p>{{ post.title }}</p></h2>
     </div>
+    <div class="bd-highlight ">
+      <p style="color:slategrey" class="fst-italic">{{ localFormat(post.lastModificationDate, "MMM d, y, h:mm:ss a", locale) }}</p>
+    </div>
     <mat-card-content>
-      <div class="col-xs-12 col-md-6 col-md-offset-3">
-          <div>{{ post.content }}</div>
-      </div>
+          <p class="text-break">{{ post.content }}</p>
     </mat-card-content>
 
-    <div class="btn-group" role="group" *ngIf="post.ownerId == authService.loggedInUser$.getValue().userId">
-        <button type="button" class="btn btn-danger" (click)="onDelete(post)">Delete</button>
-        <button type="button" class="btn btn-primary" (click)="onEdit(post)">Edit</button>
+    <div class="btn-group" role="group" *ngIf="!!authService.loggedInUser$.getValue() && post.ownerId === authService.loggedInUser$.getValue().userId">
+        <button type="button" class="btn btn-danger btn-sm" (click)="onDelete(post)">Delete</button>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="onEdit(post)">Edit</button>
     </div>
 
   </mat-card>

@@ -14,19 +14,13 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class UserProfileComponent implements OnInit {
   user: User;
-  data: any;
-  id: number;
+
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
-    private authService: AuthService,
-    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.data = this.route.snapshot.data;
-    this.user = this.data['user'];
-
+    this.user = this.route.snapshot.data['user'];
   }
 }

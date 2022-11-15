@@ -14,6 +14,7 @@ import { User } from 'src/app/shared/models/user.model';
 export class UserPicturesComponent implements OnInit {
   @Input() user: User;
   src: Picture[];
+  isOwner: boolean = false;
 
   _albums: any = [];
 
@@ -23,13 +24,17 @@ export class UserPicturesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if(this.user.userId == this.authService.loggedInUser$.getValue().userId){
+      this.isOwner = true;
+    }
     this.src = this.user.pictureList;
     this.src.forEach(pic => {
       this._albums.push(pic.bytea);
     })
   }
 
-  onClick(image: Picture){
-
+  onDelete(id: number){
+    this.pictureService.delete(id)
   }
+
 }

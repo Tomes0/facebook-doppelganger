@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, shareReplay, tap } from 'rxjs';
+import { map, Observable, shareReplay, take, tap } from 'rxjs';
 import { Picture } from 'src/app/shared/models/picture.model';
 import { Post } from 'src/app/shared/models/post.model';
 import { environment } from 'src/environments/environment';
@@ -17,7 +17,7 @@ export class PictureService {
 
   constructor(private http: HttpClient)  { }
 
-  savePicture(picture: File, id: number){
+  save(picture: File, id: number){
     let reader = new FileReader();
     reader.readAsDataURL(picture);
 
@@ -26,17 +26,15 @@ export class PictureService {
     reader.onload = function() {
       there.http.post(there.environment.backendUrl + '/api/picture/save/' + id,
     {
-      extension: picture.type,
       bytea: reader.result
     }).subscribe();
-
     }
-
-
-
-
   }
 
-
+  delete(id: number){
+    this.http.delete(this.environment.backendUrl + '/api/picture/delete/' + id).pipe(
+      take(1)
+    ).subscribe();
+  }
 
 }

@@ -1,14 +1,20 @@
 <div class="container">
   <form [formGroup]="form">
-    <h2>Create a post</h2>
 
+    <div class="d-flex justify-content-between" style="padding-bottom: 20px;">
+      <h2>Create a post</h2>
+      <button type="button" class="btn-close" (click)="onCancel()"></button>
+    </div>
     <div class="input-group mb-3 form-floating">
-      <input type="text" class="form-control" id="floatingInput" formControlName="title" aria-label="title" aria-describedby="basic-addon1">
-      <label for="floatingInput">Title</label>
+      <input type="text" maxlength="50" class="form-control" id="floatingInput1" formControlName="title" aria-label="title" aria-describedby="basic-addon1">
+      <label for="floatingInput1">Title</label>
     </div>
     <div class="input-group form-floating">
-      <textarea class="form-control" id="floatingInput" aria-label="content" formControlName="content" style="height: 100px;"></textarea>
+      <textarea maxlength="255" class="form-control" id="floatingInput" aria-label="content" formControlName="content" style="height: 120px;" #textArea></textarea>
       <label for="floatingInput">Content</label>
+    </div>
+    <div class="d-flex justify-content-end">
+      <p style="color:slategrey" class="fst-italic"> {{textArea.textLength}}/{{textArea.maxLength}} </p>
     </div>
     <br>
     <div class="d-flex justify-content-between">

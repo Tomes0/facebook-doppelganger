@@ -1,7 +1,8 @@
-import { AfterContentInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterContentInit, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service'
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +12,8 @@ import { AuthService } from 'src/app/core/services/auth.service'
 export class AuthComponent implements OnInit {
   authForm: FormGroup;
   loginMode:boolean;
+  editMode: boolean;
+  showPassword: boolean;
 
   email = '';
   userName = '';
@@ -19,10 +22,7 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private dialogRef: MatDialogRef<AuthComponent>
-  ) {
-
-  }
+    private dialogRef: MatDialogRef<AuthComponent>){}
 
   ngOnInit(): void {
     this.loginMode=true;
@@ -54,10 +54,14 @@ export class AuthComponent implements OnInit {
     if(this.loginMode){
       this.authService.login(this.authForm.value['email'], this.authForm.value['password']);
       this.dialogRef.close();
-    }else{
+    }
+    if(!this.loginMode){
       this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['userName']);
       this.onSwitchMode();
     }
+  }
+  onTogglePassword(){
+    this.showPassword = !this.showPassword
   }
 
   close() {

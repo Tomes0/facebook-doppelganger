@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, shareReplay, take, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, shareReplay, take, tap } from 'rxjs';
 import { Post } from 'src/app/shared/models/post.model';
 import { environment } from 'src/environments/environment';
 
@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class PostService {
 
   environment = environment
-  public posts$!: Observable<Post[]>;
+  postsChanged$ = new BehaviorSubject<Post[]>(null)
 
   constructor(private http: HttpClient)  { }
 
@@ -20,12 +20,13 @@ export class PostService {
     return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all').pipe(
       shareReplay(),
       map(result => {
-        return result.sort((a,b) => {
-          return a.creationDate > b.creationDate ? -1 : 1;
-          })
+        const sorted = result.sort((a,b) =>{
+          return a.creationDate.valueOf() < b.creationDate.valueOf()? 1 : -1
+        })
+        return sorted
       }),
-      take(1),
-      shareReplay())
+      take(1)).subscribe(res => this.postsChanged$.next(res))
+
   }
 
   createPost(title: string, content: string, userId: number){

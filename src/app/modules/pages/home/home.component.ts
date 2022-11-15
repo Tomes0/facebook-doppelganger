@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PostService } from 'src/app/core/services/post.service';
 import { Post } from 'src/app/shared/models/post.model';
 
@@ -8,13 +8,18 @@ import { Post } from 'src/app/shared/models/post.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
-  posts$: Observable<Post[]> = this.postService.getAllPosts();
 
-  constructor(private postService: PostService) { }
+  posts$ = new BehaviorSubject<Post[]>(null)
+
+  constructor(public postService: PostService) { }
+
 
   ngOnInit(): void {
+    this.postService.getAllPosts()
   }
+  ngOnDestroy(): void {
 
+  }
 }

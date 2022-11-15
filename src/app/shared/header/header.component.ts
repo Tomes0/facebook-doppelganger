@@ -6,6 +6,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { AuthComponent } from 'src/app/modules/pages/auth/auth.component';
 import { PictureUploadComponent } from 'src/app/modules/pages/picture/picture-upload/picture-upload.component';
 import { CreatePostComponent } from 'src/app/modules/pages/post/create-post/create-post.component';
+import { UserSettingsComponent } from 'src/app/modules/pages/user-profile/user-settings/user-settings.component';
 import { User } from '../models/user.model';
 
 @Component({
@@ -52,10 +53,17 @@ export class HeaderComponent{
 
     const dialogRef = this.dialog.open(PictureUploadComponent, dialogConfig);
   }
+  onSettings(){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "800px";
+
+    const dialogRef = this.dialog.open(UserSettingsComponent, dialogConfig);
+  }
 
   logout(){
-    console.log('asdasd')
-
     this.authService.logout();
     let currentUrl:string = this.router.url;
     this.router.navigate([currentUrl]);

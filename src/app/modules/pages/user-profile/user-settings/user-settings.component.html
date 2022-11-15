@@ -1,0 +1,50 @@
+<div class="row">
+
+  <div class="col-xs-12" >
+
+    <div class="d-flex justify-content-between" style="padding-bottom: 20px;">
+      <h2>Update password</h2>
+      <button type="button" class="btn-close" (click)="close()"></button>
+    </div>
+
+    <form [formGroup]="settingsForm">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-floating mb-3">
+            <input type="text" id="floatingInput" class="form-control" formControlName="password">
+            <label for="floatingInput">Password</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" (click)="onSubmitPassword()" [disabled]="!settingsForm.valid">Update</button>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <div class="d-flex justify-content-between" style="padding-bottom: 20px;">
+      <h2>Upload profile picture</h2>
+    </div>
+
+    <form [formGroup]="profilePictureForm">
+      <div class="mb-3">
+        <input type="file" accept=".png, .jpeg, .jpg" class="form-control" formControlName="profilePicture" aria-describedby="inputGroupFileAddon03" aria-label="Upload" #fileUpload>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" (click)="onSubmitProfilePicture()" [disabled]="!profilePictureForm.valid">Upload</button>
+        </div>
+      </div>
+    </form>
+
+    <br>
+    <div class="alert alert-danger" role="alert">
+      This action is not reversible!!!
+      <br>
+      <button class="btn btn-danger" (click)="onDeleteProfile()">DELETE PROFILE</button>
+    </div>
+
+  </div>
+</div>

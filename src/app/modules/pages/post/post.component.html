@@ -1,31 +1,85 @@
 <ng-container *ngIf="post.ownerObject">
   <mat-card class="posts">
-    <div class="d-flex flex-column bd-highlight mb-3">
+    <div class="d-flex flex-column bd-highlight">
       <div class="bd-highlight">
         <h2><p>{{ post.title }}</p></h2>
       </div>
       <div class="bd-highlight">
 
-        <div class="d-flex flex-row bd-highlight mb-3">
+        <div class="d-flex flex-row bd-highlight">
           <div class="bd-highlight">
-            <img class="rounded-circle rounded float-start " style="width: 20px;"
-              [src]="post.ownerObject.pictureList[0]? post.ownerObject.pictureList[0].bytea:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'" >
+
           </div>
+
           <div class="bd-highlight">
             <a [routerLink]="['/profile', post.ownerId]" class="nav-link">
-              <h4>{{ post.ownerObject.userName }}</h4>
+
+
+
+
+              <button *ngIf="!authService.isLoggedIn$.getValue()" type="button" class="btn btn-secondary profileButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <img class="rounded-circle rounded float-start" style="max-width: 24px; max-height: 24px;"
+                      [src]="post.ownerObject.profilePicture? post.ownerObject.profilePicture:
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'" >
+                    </div>
+                    <div class="col">
+                      <h4 class="profileButton">{{ post.ownerObject.userName }}</h4>
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+              <button *ngIf=" authService.isLoggedIn$.getValue()" type="button" class="btn btn-secondary profileButton">
+                <div class="container">
+                  <div class="row">
+                    <div class="col">
+                      <img class="rounded-circle rounded float-start" style="max-width: 24px; max-height: 24px;"
+                      [src]="post.ownerObject.profilePicture? post.ownerObject.profilePicture:
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png'" >
+                    </div>
+                    <div class="col">
+                      <h4 class="profileButton">{{ post.ownerObject.userName }}</h4>
+                    </div>
+                  </div>
+                </div>
+              </button>
+
+
+
+
+
             </a>
           </div>
         </div>
-
+        <div class="bd-highlight ">
+          <p style="color:slategrey" class="fst-italic">{{ formatedDate }}</p>
+        </div>
       </div>
     </div>
+
     <br>
     <mat-card-content>
-        <div>{{ post.content }}</div>
+      <p class="text-break">{{ post.content }}</p>
     </mat-card-content>
   </mat-card>
 </ng-container>
 
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error occured!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+          Please log in to view user profile!
+        </div>
+      </div>
+    </div>
+  </div>
