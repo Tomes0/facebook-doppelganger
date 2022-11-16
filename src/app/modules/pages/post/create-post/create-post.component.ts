@@ -61,13 +61,9 @@ export class CreatePostComponent implements OnInit {
 
   onSubmit(){
     if(this.editMode){
-      this.postService.updatePost(this.postId, this.form.value['content'], this.form.value['title']).subscribe(
-        x => this.postService.getAllPosts()
-      );
+      this.postService.updatePost(this.postId, this.form.value['content'], this.form.value['title'])
     }else{
-      this.postService.createPost(this.form.value['title'], this.form.value['content'], this.authService.loggedInUser$.getValue().userId).subscribe(
-        x => this.postService.getAllPosts()
-      );
+      this.postService.createPost(this.form.value['title'], this.form.value['content'], this.authService.loggedInUser$.getValue().userId)
     }
 
     this.userService.get(this.authService.loggedInUser$.getValue().userId);

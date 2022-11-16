@@ -8,18 +8,15 @@ import { Post } from 'src/app/shared/models/post.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
 
-  posts$ = new BehaviorSubject<Post[]>(null)
+  posts$ = this.postService.getAllPosts();
 
-  constructor(public postService: PostService) { }
+  constructor(private postService: PostService) { }
 
 
   ngOnInit(): void {
-    this.postService.getAllPosts()
   }
-  ngOnDestroy(): void {
 
-  }
 }

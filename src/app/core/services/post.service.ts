@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, shareReplay, take, tap } from 'rxjs';
+import { BehaviorSubject, map, shareReplay, take, tap } from 'rxjs';
 import { Post } from 'src/app/shared/models/post.model';
 import { environment } from 'src/environments/environment';
+import { UserService } from './user.service';
 
 
 
@@ -12,9 +13,13 @@ import { environment } from 'src/environments/environment';
 export class PostService {
 
   environment = environment
-  posts$ = new BehaviorSubject<Post[]>(null)
+  private posts = new BehaviorSubject<Post[]>(null)
+  postsObs$ = this.posts.asObservable()
 
-  constructor(private http: HttpClient)  { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService
+    )  { }
 
   getAllPosts(){
     return this.http.get<Post[]>(this.environment.backendUrl + '/api/post/get-all').pipe(
@@ -25,9 +30,7 @@ export class PostService {
         })
         return sorted
       }),
-      take(1)).subscribe(
-        res => this.posts$.next(res)
-      )
+      take(1))
 
   }
 
@@ -38,19 +41,20 @@ export class PostService {
         content:content,
       }).pipe(
         take(1),
-        tap(
-          this.getAllPosts()
+        tap()
         )
+        .subscribe(
+          x=> {
+            this.getAllPosts()
+            this.userService.get(userId)
+          }
         );
   }
 
   deletePost(postId: number){
     return this.http.delete(this.environment.backendUrl + '/api/post/delete/' + postId).pipe(
       take(1),
-      tap(
-        this.getAllPosts()
-      )
-      );
+      ).subscribe();
   }
 
   updatePost(postId: number, content: string, title: string){
@@ -60,9 +64,8 @@ export class PostService {
       content:content,
     }).pipe(
       take(1),
-      tap(
-        this.getAllPosts()
-      )
+      ).subscribe(
+        x=> this.getAllPosts()
       );
   }
 

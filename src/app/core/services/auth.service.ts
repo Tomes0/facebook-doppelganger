@@ -35,13 +35,13 @@ export class AuthService {
     ).subscribe();
   }
 
-  register(email: string, password: string, fullName: string, userName: string){
+  register(request:{email: string, password: string, fullName: string, userName: string}){
     return this.http.post(this.environment.backendUrl + '/api/auth/register',
     {
-      email:email,
-      password:password,
-      fullName:fullName,
-      userName:userName
+      email:request.email,
+      password:request.password,
+      fullName:request.fullName,
+      userName:request.userName
     }).pipe(
       take(1)
     ).subscribe();

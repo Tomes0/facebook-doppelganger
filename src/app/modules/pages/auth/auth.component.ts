@@ -56,7 +56,11 @@ export class AuthComponent implements OnInit {
       this.dialogRef.close();
     }
     if(!this.loginMode){
-      this.authService.register(this.authForm.value['email'], this.authForm.value['password'], this.authForm.value['fullName'], this.authForm.value['userName']);
+      this.authService.register({
+        email: this.authForm.value['email'],
+        password: this.authForm.value['password'],
+        fullName: this.authForm.value['fullName'],
+        userName: this.authForm.value['userName']});
       this.onSwitchMode();
     }
   }

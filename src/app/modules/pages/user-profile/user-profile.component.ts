@@ -17,12 +17,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userSub: Subscription
 
   constructor(
-    private route: ActivatedRoute,
-    private userService: UserService
+    public userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.userSub = this.userService.user$.subscribe(res => this.user = res)
+    this.userSub = this.userService.userObs$.subscribe(res => this.user = res)
   }
 
   ngOnDestroy(): void {

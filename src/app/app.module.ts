@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './modules/modules/auth.module';
 import { HeaderComponent } from './shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CorsInterceptor } from './core/services/cors-header-interceptor.service';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { HomeModule } from './modules/modules/home.module';
 import { PostService } from './core/services/post.service';
@@ -48,11 +47,6 @@ import { UserSettingsComponent } from './modules/pages/user-profile/user-setting
       provide: MatDialogRef,
       useValue: {}
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CorsInterceptor,
-      multi: true
-    }
   ],
   bootstrap: [AppComponent]
 })

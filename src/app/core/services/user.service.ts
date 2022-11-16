@@ -11,20 +11,15 @@ import { Picture } from 'src/app/shared/models/picture.model';
 })
 export class UserService {
   environment = environment
-  user$ = new BehaviorSubject<User>(null);
-
-  resolverGet(id): Observable<User>{
-    return this.http.get<User>(this.environment.backendUrl + '/api/user/get/' + id).pipe(
-      take(1)
-    )
-  }
+  private userSubejct = new BehaviorSubject<User>(null);
+  userObs$ = this.userSubejct.asObservable();
 
   get(id: number){
     return this.http.get<User>(this.environment.backendUrl + '/api/user/get/' + id).pipe(
       take(1)
     ).subscribe(
       res => {
-        this.user$.next(res)
+        this.userSubejct.next(res)
       }
     )
   }
@@ -53,10 +48,9 @@ export class UserService {
         bytea: reader.result
       }).pipe(
         take(1),
-        tap(
-          there.get(id)
-        )
-      ).subscribe()
+      ).subscribe(
+        x => there.get(id)
+      )
     }
   }
 
@@ -66,10 +60,9 @@ export class UserService {
         passoword: passoword,
       }).pipe(
         take(1),
-        tap(
-          this.get(id)
-        )
-      ).subscribe();
+      ).subscribe(
+        x => this.get(id)
+      );
   }
 
   delete(id: number){

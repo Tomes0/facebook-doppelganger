@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Input, LOCALE_ID, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { PostService } from 'src/app/core/services/post.service';
 import { UserService } from 'src/app/core/services/user.service';
@@ -18,9 +18,10 @@ import { CreatePostComponent } from '../../post/create-post/create-post.componen
   styleUrls: ['./user-posts.component.css']
 })
 export class UserPostsComponent implements OnInit, OnDestroy {
-  user: User;
+  @Input() user$: Observable<User>;
+  postListSub: Subscription
   posts: Post[];
-  userSub: Subscription
+
   localFormat = formatDate;
 
   constructor(
@@ -33,17 +34,22 @@ export class UserPostsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.userSub = this.userService.user$.subscribe(res =>
-      {
-        const sorted = res.postList.sort((a,b) =>{
-          return a.creationDate.valueOf() < b.creationDate.valueOf()? 1 : -1
-        })
+    this.postListSub = this.user$.pipe(
+      map(
+        user => {
+          const sorted = user.postList.sort((a,b) =>{
+            return a.creationDate.valueOf() < b.creationDate.valueOf()? 1 : -1
+          })
+          return sorted;
+        }
+      )
+    ).subscribe(
+      result => this.posts = result
+    )
 
-        this.posts = sorted
-      })
   }
   ngOnDestroy(): void {
-    this.userSub.unsubscribe()
+    this.postListSub.unsubscribe()
   }
 
   onEdit(post: Post){
@@ -63,9 +69,7 @@ export class UserPostsComponent implements OnInit, OnDestroy {
   }
 
   onDelete(post: Post){
-    return this.postService.deletePost(post.postId).pipe(
-      take(1)
-      ).subscribe();
+    return this.postService.deletePost(post.postId)
     }
 
 }

@@ -12,12 +12,11 @@ export class UserResolver implements Resolve<User>{
     const id = +route.paramMap.get('id');
 
     this.userService.get(id)
-    return this.userService.resolverGet(id);
+    return this.userService.userObs$;
 
   }
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
   ){}
 }
